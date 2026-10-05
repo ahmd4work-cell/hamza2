@@ -1171,3 +1171,24 @@ window.clearAllFilter = clearAllFilter;
 window.updateDynamicOwnerFilter = updateDynamicOwnerFilter;
 
 window.filterTable = filterTable;
+
+// قم بإضافة هذه الأسطر في آخر ملف opportunities.js
+window.debouncedFilterTable = debouncedFilterTable;
+window.toggleDropdown = toggleDropdown;
+window.handleBulkAction = handleBulkAction;
+window.toggleAllCheckboxes = toggleAllCheckboxes;
+window.toggleCustomFilter = toggleCustomFilter;
+window.selectAllFilter = selectAllFilter;
+window.clearAllFilter = clearAllFilter;
+window.updateFilters = updateFilters;
+window.toggleLogExpansion = toggleLogExpansion;
+window.closeNote = closeNote;
+window.saveNote = saveNote;
+
+// دوال يتم استدعاؤها داخل خلايا الجدول (Render Row)
+window.updateEditDateField = updateEditDateField;
+window.debouncedSaveSingleRow = debouncedSaveSingleRow;
+window.showStatusTooltip = showStatusTooltip;
+window.hideStatusTooltip = hideStatusTooltip;
+window.openWhatsAppChat = openWhatsAppChat;
+window.toggleSubTable = toggleSubTable;
