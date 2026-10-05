@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التذكيرات | ASGate</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./reminders.css">
+    
+    <!-- إصلاح الرعشة: حجز مساحة النافبار ثابت -->
+    <style>
+        *{box-sizing:border-box}
+        #navbarPlaceholder{
+            height:58px;
+            min-height:58px;
+            max-height:58px;
+            flex-shrink:0;
+            width:100%;
+            background:#ffffff;
+            display:block;
+            box-sizing:border-box;
+            border-bottom:1px solid #e2e8f0;
+        }
+        .dashboard-container{
+            display:flex;
+            flex-direction:column;
+            height:100vh;
+            opacity:1 !important;
+            width:100%;
+            box-sizing:border-box;
+            overflow:hidden;
+        }
+    </style>
+    </head>
+<body style="margin: 0; padding: 0; background-color: var(--bg-input, #f8fafc);">
+
+<div class="dashboard-container">    
+    <!-- Navbar ثابت لمنع الرعشة -->
+    <div id="navbarPlaceholder">
+        <nav class="top-navbar" data-unified="true">
+            <div style="display:flex; align-items:center; gap:20px; height:100%;">
+                <div class="nav-brand">
+                    <i class="fas fa-layer-group" style="color:#2563eb;"></i> ASGate
+                </div>
+                <ul class="nav-links">
+                    <li><a href="./index.html" id="nav-index"><i class="fas fa-home"></i> الرئيسية</a></li>
+                    <li><a href="./visits.html" id="nav-visits"><i class="fas fa-map-marker-alt"></i> الزيارات</a></li>
+                    <li><a href="./opportunities.html" id="nav-opportunities"><i class="fas fa-lightbulb"></i> الفرص</a></li>
+                    <li><a href="./customers.html" id="nav-customers"><i class="fas fa-users"></i> العملاء</a></li>
+                    <li><a href="./sales.html" id="nav-sales"><i class="fas fa-shopping-cart"></i> المبيعات</a></li>
+                    <li><a href="./reminders.html" id="nav-reminders" class="active"><i class="fas fa-bell"></i> التذكيرات</a></li>
+                </ul>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; height:100%;">
+                <div class="nav-search-container">
+                    <div class="nav-search-input-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="globalSearchInput" placeholder="بحث شامل في النظام...">
+                    </div>
+                    <div id="searchResults" class="search-results-dropdown"></div>
+                </div>
+                <div class="nav-actions">
+                    <button class="nav-btn" id="darkModeToggle" title="الوضع الليلي"><i class="fas fa-moon"></i></button>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="reminders-container">
+        <div class="reminders-grid" id="remindersGrid">
+            <!-- يتم توليد الـ 12 مذكرة برمجياً -->
+        </div>
+    </div>
+</div>
+
+<!-- التقويم المتحرك المخصص -->
+<div class="calendar-overlay" id="calendarOverlay">
+    <div class="custom-datepicker">
+        <!-- الشريط العلوي يحتوي على القوائم المنسدلة والأسهم -->
+        <div class="datepicker-header">
+            <div class="month-nav">
+                <i class="fas fa-chevron-left month-nav-btn" id="prevMonthBtn" title="الشهر السابق"></i>
+                <select id="calMonthSelect" class="datepicker-select"></select>
+                <i class="fas fa-chevron-right month-nav-btn" id="nextMonthBtn" title="الشهر التالي"></i>
+            </div>
+            <select id="calYearSelect" class="datepicker-select"></select>
+        </div>
+
+        <div class="weekdays-grid">
+            <span>Su</span>
+            <span>Mo</span>
+            <span>Tu</span>
+            <span>We</span>
+            <span>Th</span>
+            <span class="weekend-day">Fr</span>
+            <span class="weekend-day">Sa</span>
+        </div>
+
+        <div class="days-container">
+            <div class="days-grid" id="calDaysGrid">
+                <!-- أرقام الأيام تتولد برمجياً -->
+            </div>
+        </div>
+
+        <!-- الأزرار السفلية -->
+        <div class="datepicker-footer">
+            <button class="btn-cancel" id="calCancelBtn">إلغاء</button>
+            <div class="action-buttons">
+                <button class="btn-clear-date" id="calClearBtn">مسح</button>
+                <button class="btn-next" id="calNextBtn">تأكيد</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- نافذة تأكيد الحذف -->
+<div class="confirm-overlay" id="confirmOverlay">
+    <div class="confirm-modal">
+        <h3 style="margin-top: 0; font-family: 'Cairo', sans-serif; color: var(--text-main, #0f172a);">تأكيد الحذف</h3>
+        <p style="font-family: 'Cairo', sans-serif; font-size: 14px; color: var(--text-muted, #475569);">هل أنت متأكد أنك تريد حذف هذه المذكرة بالكامل؟</p>
+        <div class="confirm-actions">
+            <button class="btn-cancel-delete" id="cancelDeleteBtn">إلغاء</button>
+            <button class="btn-confirm-delete" id="confirmDeleteBtn">حذف</button>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="./navbar.js"></script>
+<script type="module" src="./reminders.js"></script>
+</body>
+</html>
