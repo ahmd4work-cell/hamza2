@@ -337,19 +337,13 @@ function renderRow(v = {}, prepend = false) {
         <td><input type="number" class="excel-input opp-value-input readonly-input" value="${v.oppValue || ''}" readonly style="color:var(--accent-blue); font-weight:800; cursor:not-allowed; background: transparent;"></td>
         <td><div class="notes-preview" onclick="openNote(this)" data-full-notes='${notesJson.replace(/'/g, "&apos;")}' id="preview-${Date.now()}">${lastNoteText}</div></td>
         <td>
-            <select class="excel-input status-select" data-old="${v.status || ''}" onfocus="this.dataset.old=this.value" onchange="handleStatusChange(this, '${rowId}')">
-                <option value="" ${!v.status ? 'selected' : ''}>-</option>
-                <option value="تأهيل لفرصة" ${v.status === 'تأهيل لفرصة' ? 'selected' : ''}>تأهيل لفرصة</option>
-                <option value="مميزة" ${v.status === 'مميزة' ? 'selected' : ''}>مميزة</option>
-                <option value="مهتم" ${v.status === 'مهتم' ? 'selected' : ''}>مهتم</option>
-                <option value="متابعة" ${v.status === 'متابعة' ? 'selected' : ''}>متابعة</option>
-                <option value="عرض سعر" ${v.status === 'عرض سعر' ? 'selected' : ''}>عرض سعر</option>
-                <option value="زيارة" ${v.status === 'زيارة' ? 'selected' : ''}>زيارة</option>
-                <option value="اتصال" ${v.status === 'اتصال' ? 'selected' : ''}>اتصال</option>
-                <option value="رابح" ${v.status === 'رابح' ? 'selected' : ''}>رابح</option>
-                <option value="فقدان" ${v.status === 'فقدان' ? 'selected' : ''}>فقدان</option>
-                <option value="غير مهتم" ${v.status === 'غير مهتم' ? 'selected' : ''}>غير مهتم</option>
-            </select>
+<select class="excel-input status-select" onchange="autoSaveRow('${rowId}', 'الحالة'); updateStatusStyle(this);">
+    <option value="" disabled ${!v.status ? 'selected' : ''}>اختر...</option>
+    <option value="مهتم" ${v.status === 'مهتم' ? 'selected' : ''}>مهتم</option>
+    <option value="رابح" ${v.status === 'رابح' ? 'selected' : ''}>رابح</option>
+    <option value="فقدان" ${v.status === 'فقدان' ? 'selected' : ''}>فقدان</option>
+</select>
+
         </td>
         <td>
             <input type="text" class="excel-input exp-date-input-display readonly-input" value="${formatDateToDisplay(v.expDate || '')}" readonly style="cursor:pointer;" onclick="openCustomDatePicker(event, this, '${rowId}')" placeholder="اختر التاريخ">
